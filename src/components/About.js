@@ -1,10 +1,42 @@
-import React from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 const AboutUs = () => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  // Create a reference for the section
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (entry.isIntersecting) {
+          setIsVisible(true); // Trigger the animation when section comes into view
+        }
+      },
+      { threshold: 0.5 } // Trigger when 50% of the section is in view
+    );
+
+    // Store the current reference value in a local variable
+    const currentSection = sectionRef.current;
+
+    if (currentSection) {
+      observer.observe(currentSection);
+    }
+
+    // Cleanup observer on component unmount
+    return () => {
+      if (currentSection) {
+        observer.unobserve(currentSection);
+      }
+    };
+  }, []);
+
   return (
     <section
       id="about"
       className="py-16 bg-gradient-to-br from-width-500 to-blue-700 text-black relative overflow-hidden"
+      ref={sectionRef} // Attach the reference to the section
     >
       {/* Background pattern */}
       <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/dark-matter.png')] opacity-30"></div>
@@ -14,7 +46,13 @@ const AboutUs = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
           {/* Visi */}
-          <div className="bg-white text-gray-800 p-6 rounded-lg shadow-lg transition-all hover:shadow-xl">
+          <div
+            className={`bg-white text-gray-800 p-6 rounded-lg shadow-lg transition-all hover:shadow-xl transform ${
+              isVisible
+                ? "translate-x-0 opacity-100"
+                : "-translate-x-12 opacity-0"
+            } duration-1000 ease-out`}
+          >
             <h3 className="text-2xl font-semibold text-green-500 mb-4">Visi</h3>
             <p className="text-lg font-light">
               Menjadi pusat pengembangan bakat sepak bola yang unggul dan
@@ -24,7 +62,13 @@ const AboutUs = () => {
           </div>
 
           {/* Misi */}
-          <div className="bg-white text-gray-800 p-6 rounded-lg shadow-lg transition-all hover:shadow-xl">
+          <div
+            className={`bg-white text-gray-800 p-6 rounded-lg shadow-lg transition-all hover:shadow-xl transform ${
+              isVisible
+                ? "translate-x-0 opacity-100"
+                : "translate-x-12 opacity-0"
+            } duration-1000 ease-out`}
+          >
             <h3 className="text-2xl font-semibold text-blue-500 mb-4">Misi</h3>
             <ul className="list-disc list-inside text-lg font-light">
               <li>
