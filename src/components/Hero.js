@@ -14,7 +14,7 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className={`bg-cover bg-center text-white py-20 relative z-10 transition-opacity duration-1000 ${
+      className={`bg-cover bg-center text-white py-20 relative z-10 transition-opacity duration-1000 mt-20 ${
         isVisible ? "opacity-100" : "opacity-0"
       }`}
       style={{
@@ -24,11 +24,6 @@ const Hero = () => {
         backgroundColor: "#1a1a1a",
       }}
     >
-      <img
-        src="https://futscore.com/assets/img/logo.png"
-        alt="Youth Tiger Soccer"
-        className="w-[6rem] h-auto mt-[-5rem] ml-[3rem]"
-      />
       <div className="container mx-auto text-center z-10 relative">
         <h1 className="text-4xl md:text-5xl font-extrabold text-yellow-400 leading-tight text-shadow-lg animate__animated animate__fadeInUp">
           Youth Tiger Soccer School

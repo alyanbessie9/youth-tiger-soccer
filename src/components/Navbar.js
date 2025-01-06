@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react"; // Import useState and useEffect
+import "animate.css";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -18,11 +19,16 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`bg-red-600 text-white py-5 z-20 relative transition-opacity duration-1000 ${
+      className={`bg-red-600 text-white py-5 z-20 fixed transition-opacity duration-1000 ${
         isVisible ? "opacity-100" : "opacity-0"
-      }`}
+      } top-0 left-0 w-full`}
     >
       <div className="container mx-auto flex justify-between items-center px-4">
+        <img
+          src="https://futscore.com/assets/img/logo.png"
+          alt="Youth Tiger Soccer"
+          className="w-[4rem] h-[4rem]"
+        />
         <h1 className="text-2xl font-bold text-yellow-400"> </h1>
 
         <button
@@ -53,6 +59,7 @@ const Navbar = () => {
           </svg>
         </button>
 
+        {/* Mobile Menu */}
         <div
           className={`absolute top-14 right-0 bg-blue-400 text-white rounded-md w-48 transition-all ${
             isMenuOpen ? "block" : "hidden"
@@ -74,6 +81,7 @@ const Navbar = () => {
           </ul>
         </div>
 
+        {/* Desktop Menu */}
         <div className="hidden lg:flex space-x-6">
           <a href="#home" className="hover:text-yellow-400">
             Beranda
